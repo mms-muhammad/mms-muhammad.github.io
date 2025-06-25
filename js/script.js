@@ -1,64 +1,54 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Мобильное меню
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('.nav');
-    
-    burger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        nav.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
-    });
-    
-    // Тёмная тема
-    const themeToggle = document.getElementById('theme-toggle');
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    
-    themeToggle.addEventListener('click', function() {
-        const theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    });
-    
-    // Кастомный курсор
-    const cursor = document.querySelector('.cursor');
-    
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
-    
-    document.querySelectorAll('[data-cursor-hover]').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.width = '40px';
-            cursor.style.height = '40px';
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            cursor.style.width = '20px';
-            cursor.style.height = '20px';
-        });
-    });
-    
-    // Год в футере
-    document.querySelector('.year').textContent = new Date().getFullYear();
-    
-    // Плавный скролл для ссылок
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+// Переключение темы
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+const storedTheme = localStorage.getItem('theme');
+
+if (storedTheme === 'dark') body.classList.add('dark');
+
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+});
+
+// Подставляем текущий год в футер
+const yearSpan = document.getElementById('year');
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
+}
+
+// Загрузка ссылок из папки social
+const socialFiles = [
+  'social/tg-link.txt',
+  'social/yotube-link.txt',
+  'social/scratch.txt',
+  'social/game-link.txt'
+];
+
+const socialLabels = {
+  'tg-link.txt': 'Telegram',
+  'yotube-link.txt': 'YouTube',
+  'scratch.txt': 'Scratch',
+  'game-link.txt': 'Мои игры'
+};
+
+const socialList = document.getElementById('social-links');
+socialList.innerHTML = '';
+
+socialFiles.forEach(path => {
+  fetch(path)
+    .then(res => res.text())
+    .then(url => {
+      const fileName = path.split('/').pop();
+      const label = socialLabels[fileName] || fileName;
+      if (url.trim()) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = url.trim();
+        a.textContent = label;
+        a.target = '_blank';
+        li.appendChild(a);
+        socialList.appendChild(li);
+      }
+    })
+    .catch(console.error);
 });
