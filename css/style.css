@@ -1,15 +1,15 @@
-/* --- Цвета и базовые настройки --- */
+/* === НЕОНОВЫЕ ПЕРЕМЕННЫЕ И СТИЛИ === */
+
 :root {
-  --yellow-light: #f7d369;
-  --yellow-dark: #c7a936;
-  --blue-light: #3366cc;
-  --blue-dark: #1a3a99;
-  --text-light: #333;
-  --text-dark: #e1e1e1;
-  --bg-light: #fff;
-  --bg-dark: #121212;
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-dark: rgba(0, 0, 0, 0.6);
+  --neon-yellow: #f7e547;
+  --neon-yellow-glow: #f7e547cc;
+  --neon-blue: #0ff;
+  --neon-blue-glow: #0ff8;
+  --bg-dark: #0a0a13;
+  --text-light: #e0e8ff;
+  --shadow-neon-yellow: 0 0 6px var(--neon-yellow), 0 0 20px var(--neon-yellow-glow);
+  --shadow-neon-blue: 0 0 8px var(--neon-blue), 0 0 25px var(--neon-blue-glow);
+  --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 * {
@@ -18,11 +18,15 @@
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-light);
+  background: var(--bg-dark);
   color: var(--text-light);
-  line-height: 1.5;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -30,10 +34,13 @@ body {
   margin: 0 auto;
 }
 
-/* --- Хедер --- */
+/* === ХЕДЕР === */
+
 header {
-  padding: 1.5rem 0;
-  border-bottom: 2px solid var(--yellow-dark);
+  padding: 1.8rem 0;
+  border-bottom: 1px solid #111126;
+  display: flex;
+  justify-content: center;
 }
 
 .header-inner {
@@ -41,197 +48,292 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* --- Аватар с неоном --- */
+
+.avatar-neon-wrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px var(--neon-blue));
 }
 
 .avatar {
-  width: 70px;
-  height: 70px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 2px 8px var(--shadow-light);
-  transition: box-shadow 0.3s ease;
+  border: 2px solid var(--neon-blue);
+  box-shadow: var(--shadow-neon-blue);
+  transition: filter 0.3s ease;
+  position: relative;
+  z-index: 5;
 }
+
+/* --- Анимированные неон-блоки вокруг аватара --- */
+
+.neon-blocks {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.neon-block {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--neon-yellow);
+  box-shadow: 0 0 5px var(--neon-yellow), 0 0 15px var(--neon-yellow-glow);
+  border-radius: 4px;
+  opacity: 0.7;
+  animation: neonPulse 3s infinite ease-in-out;
+  animation-delay: calc(var(--i) * 0.35s);
+}
+
+/* Расположение блоков вокруг круга (8 штук) */
+
+.neon-block:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.neon-block:nth-child(2) { top: 15%; left: 85%; transform: translate(-50%, -50%); }
+.neon-block:nth-child(3) { top: 50%; left: 100%; transform: translate(-100%, -50%); }
+.neon-block:nth-child(4) { top: 85%; left: 85%; transform: translate(-50%, -50%); }
+.neon-block:nth-child(5) { top: 100%; left: 50%; transform: translate(-50%, -100%); }
+.neon-block:nth-child(6) { top: 85%; left: 15%; transform: translate(-50%, -50%); }
+.neon-block:nth-child(7) { top: 50%; left: 0; transform: translate(0, -50%); }
+.neon-block:nth-child(8) { top: 15%; left: 15%; transform: translate(-50%, -50%); }
+
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 0.7;
+    box-shadow: 0 0 8px var(--neon-yellow), 0 0 20px var(--neon-yellow-glow);
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 18px var(--neon-yellow), 0 0 35px var(--neon-yellow-glow);
+    transform: scale(1.3) translateY(-4px);
+  }
+}
+
+/* --- Текст хедера --- */
 
 .header-text {
   flex-grow: 1;
-  margin-left: 1rem;
+  padding-left: 1rem;
+  user-select: none;
 }
 
 h1 {
   margin: 0;
-  font-weight: 700;
-  font-size: 2.8rem;
-  color: var(--blue-dark);
-  user-select: none;
+  font-weight: 900;
+  font-size: 3.2rem;
+  color: var(--neon-blue);
+  text-shadow:
+  0 0 6px var(--neon-blue),
+  0 0 15px var(--neon-blue-glow),
+  0 0 20px var(--neon-blue-glow);
 }
 
 .subtitle {
-  margin: 0.15rem 0 0 0;
-  font-weight: 500;
-  font-size: 1.1rem;
-  color: #555;
-  user-select: none;
-}
-
-/* Кнопка темы */
-#theme-toggle {
-background: none;
-border: none;
-cursor: pointer;
-padding: 0.25rem;
-transition: transform 0.3s ease;
-}
-
-#theme-toggle:hover {
-transform: rotate(20deg);
-}
-
-#theme-toggle img {
-width: 28px;
-height: 28px;
-filter: var(--blue-dark);
-transition: filter 0.3s ease;
-}
-
-/* --- Основной контент --- */
-main {
-  padding: 2rem 0 4rem;
-}
-
-.about h2,
-.links h2 {
-  color: var(--yellow-dark);
+  margin: 0.15rem 0 0;
   font-weight: 600;
-  font-size: 1.8rem;
-  margin-top: 2rem;
-  margin-bottom: 0.6rem;
-  user-select: none;
+  font-size: 1.3rem;
+  color: var(--neon-yellow);
+  text-shadow:
+  0 0 4px var(--neon-yellow),
+  0 0 10px var(--neon-yellow-glow);
 }
 
-.about p {
-  max-width: 600px;
+/* --- Переключатель темы (неоновый тумблер) --- */
+
+.toggle-switch {
+  width: 56px;
+  height: 28px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #0ff, #f7e547);
+  box-shadow:
+  0 0 8px var(--neon-blue),
+  inset 0 0 6px var(--neon-yellow);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.5s ease;
+  outline-offset: 4px;
+  outline-color: var(--neon-yellow);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: var(--bg-dark);
+  border-radius: 50%;
+  box-shadow:
+  0 0 10px var(--neon-blue),
+  inset 0 0 4px var(--neon-yellow);
+  transition: left 0.4s ease, background 0.4s ease;
+}
+
+body.dark-theme .toggle-thumb {
+  left: 31px;
+  background: var(--bg-dark);
+  box-shadow:
+  0 0 12px var(--neon-yellow),
+  inset 0 0 6px var(--neon-blue);
+}
+
+/* === ОСНОВНОЙ КОНТЕНТ === */
+
+main {
+  flex-grow: 1;
+  padding: 2rem 0 3rem;
+  user-select: text;
+}
+
+/* Неоновая коробка для секций */
+
+.neon-box {
+  background: #111124;
+  border: 1px solid var(--neon-blue);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow:
+  0 0 10px var(--neon-blue),
+  inset 0 0 12px var(--neon-blue-glow);
+  transition: box-shadow 0.3s ease;
+}
+
+.neon-box:hover {
+  box-shadow:
+  0 0 20px var(--neon-yellow),
+  inset 0 0 20px var(--neon-yellow-glow);
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--neon-yellow);
+  text-shadow:
+  0 0 5px var(--neon-yellow),
+  0 0 15px var(--neon-yellow-glow);
+}
+
+/* Текст в секциях */
+
+.neon-box p {
   font-size: 1.15rem;
-  color: #555;
+  line-height: 1.5;
+  color: var(--text-light);
 }
 
-/* Список ссылок */
+/* --- Ссылки --- */
+
 .social-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-width: 400px;
   display: flex;
-  flex-direction: column;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.social-list li a {
-  text-decoration: none;
-  color: var(--blue-dark);
-  font-weight: 600;
-  font-size: 1.1rem;
+.social-list li {
+  flex: 1 1 140px;
+}
+
+.social-list a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 0.6rem;
-  border-radius: 8px;
-  background: var(--yellow-light);
-  box-shadow: 0 2px 6px var(--shadow-light);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--neon-blue);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--neon-blue);
+  border-radius: 12px;
+  box-shadow:
+  0 0 6px var(--neon-blue),
+  inset 0 0 8px var(--neon-blue-glow);
+  transition: all 0.3s ease;
+  user-select: none;
 }
 
-.social-list li a svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--blue-dark);
-  flex-shrink: 0;
-  transition: fill 0.3s ease;
+.social-list a:hover,
+.social-list a:focus {
+  color: var(--neon-yellow);
+  border-color: var(--neon-yellow);
+  box-shadow:
+  0 0 15px var(--neon-yellow),
+  inset 0 0 15px var(--neon-yellow-glow);
+  outline: none;
 }
 
-.social-list li a:hover {
-  background-color: var(--blue-dark);
-  color: var(--yellow-light);
+/* --- Иконки SVG в ссылках --- */
+
+.social-list a svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  filter: drop-shadow(0 0 2px currentColor);
 }
 
-.social-list li a:hover svg {
-  fill: var(--yellow-light);
-}
+/* === ФУТЕР === */
 
-/* --- Футер --- */
 footer {
-  border-top: 2px solid var(--yellow-dark);
-  padding: 1rem 0;
+  padding: 1.2rem 0;
   text-align: center;
   font-size: 0.9rem;
-  color: #777;
+  color: #666;
+  user-select: none;
 }
 
-/* --- Тёмная тема --- */
+/* === ТЁМА === */
+
 body.dark-theme {
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
+  background: #060615;
+  color: #c0d0ff;
 }
 
 body.dark-theme h1 {
-  color: var(--blue-light);
+  color: var(--neon-yellow);
+  text-shadow:
+  0 0 12px var(--neon-yellow-glow);
 }
 
-body.dark-theme .about h2,
-body.dark-theme .links h2 {
-  color: var(--yellow-light);
+body.dark-theme .neon-box {
+  border-color: var(--neon-yellow);
+  box-shadow:
+  0 0 20px var(--neon-yellow),
+  inset 0 0 20px var(--neon-yellow-glow);
 }
 
-body.dark-theme .about p {
-  color: #ccc;
+body.dark-theme .social-list a {
+  color: var(--neon-yellow);
+  border-color: var(--neon-yellow);
+  box-shadow:
+  0 0 12px var(--neon-yellow),
+  inset 0 0 12px var(--neon-yellow-glow);
 }
 
-body.dark-theme .social-list li a {
-  background: #283845;
-  color: var(--yellow-light);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.9);
-}
-
-body.dark-theme .social-list li a svg {
-  fill: var(--yellow-light);
-}
-
-body.dark-theme .social-list li a:hover {
-  background-color: var(--yellow-light);
-  color: var(--blue-dark);
-}
-
-body.dark-theme .social-list li a:hover svg {
-  fill: var(--blue-dark);
-}
-
-/* --- Адаптивность --- */
-@media (max-width: 480px) {
-  .header-inner {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .header-text {
-    margin-left: 0;
-    text-align: center;
-  }
-
-  .avatar {
-    width: 90px;
-    height: 90px;
-  }
-
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  main {
-    padding: 1.5rem 0 3rem;
-  }
-
-  .about p,
-  .social-list {
-    max-width: 100%;
-  }
+body.dark-theme .social-list a:hover,
+body.dark-theme .social-list a:focus {
+  color: var(--neon-blue);
+  border-color: var(--neon-blue);
+  box-shadow:
+  0 0 18px var(--neon-blue),
+  inset 0 0 20px var(--neon-blue-glow);
 }
