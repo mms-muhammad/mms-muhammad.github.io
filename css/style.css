@@ -1,229 +1,164 @@
+/* Переменные для светлой и темной темы */
 :root {
-  --yellow: #ffd700;
-  --blue: #0057ff;
-  --blue-light: #66aaff;
-  --bg-light: #ffffff;
-  --bg-dark: #111111;
-  --text-light: #111111;
-  --text-dark: #f0f0f0;
-
-  --font-primary: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  --transition-speed: 0.4s;
+  --yellow: #ffc107;
+  --blue: #1565c0;
+  --bg-light: #fff;
+  --text-light: #222;
+  --bg-dark: #121212;
+  --text-dark: #eee;
+  --link-bg-light: #e3f2fd;
+  --link-bg-dark: #1e2a38;
 }
 
-body.dark {
-  --bg-color: var(--bg-dark);
-  --text-color: var(--text-dark);
-  --accent-color: var(--yellow);
-  --link-color: var(--blue-light);
-}
-
+/* Начальные стили с использованием переменных */
 body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-light);
   color: var(--text-light);
-  font-family: var(--font-primary);
-  margin: 0;
-  padding: 0;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
-  overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
 }
 
 .container {
   max-width: 900px;
-  width: 90%;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  text-align: center;
+  margin: auto;
+  padding: 1rem;
 }
 
 header {
-  position: relative;
-  padding-bottom: 2rem;
-  border-bottom: 2px solid var(--yellow);
-  margin-bottom: 2rem;
-  animation: fadeInDown 1s ease forwards;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-header .avatar {
-  width: 130px;
-  height: 130px;
+.avatar {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  border: 5px solid var(--yellow);
+  border: 3px solid var(--yellow);
   object-fit: cover;
-  filter: drop-shadow(0 0 8px var(--yellow));
-  transition: transform 0.3s ease;
 }
 
-header .avatar:hover {
-  transform: scale(1.1);
-}
-
-header h1 {
-  font-size: 3rem;
-  margin: 0.6rem 0 0.3rem;
+h1 {
   color: var(--blue);
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  animation: fadeInUp 1.3s ease forwards;
+  margin: 0;
+  flex-grow: 1;
 }
 
-header p {
-  font-size: 1.25rem;
-  margin: 0;
-  font-weight: 500;
-  color: var(--text-light);
-  animation: fadeInUp 1.6s ease forwards;
+p {
+  margin: 0.5rem 0 0 0;
 }
 
 #theme-toggle {
-position: absolute;
-top: 20px;
-right: 20px;
-background: var(--yellow);
+background: none;
 border: none;
-border-radius: 50%;
-width: 44px;
-height: 44px;
 cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-box-shadow: 0 0 8px var(--yellow);
-transition: background-color 0.3s ease;
-}
-
-#theme-toggle:hover {
-background-color: var(--blue);
-box-shadow: 0 0 12px var(--blue);
-}
-
-#theme-toggle img {
-width: 24px;
-height: 24px;
 filter: invert(0);
-transition: filter 0.3s ease;
+transition: filter 0.3s;
+width: 36px;
+height: 36px;
+padding: 0;
 }
 
-body.dark #theme-toggle img {
+body.dark-theme #theme-toggle {
   filter: invert(1);
 }
 
-section {
-  margin-bottom: 3rem;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease forwards;
-  animation-delay: 2s;
+main {
+  margin-top: 2rem;
 }
 
-section.about {
-  animation-delay: 2s;
-}
-
-section.links {
-  animation-delay: 2.4s;
-}
-
-section h2 {
-  font-size: 2rem;
-  color: var(--blue);
-  margin-bottom: 1rem;
-  letter-spacing: 0.05em;
+.about h2,
+.links h2 {
+  color: var(--yellow);
+  margin-bottom: 0.5rem;
 }
 
 ul#social-links {
   list-style: none;
   padding: 0;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  justify-items: center;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 ul#social-links li {
-  opacity: 0;
-  transform: translateY(15px);
-  animation: fadeInUp 0.7s ease forwards;
+  background-color: var(--link-bg-light);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  flex: 1 1 120px;
+  text-align: center;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  user-select: none;
 }
 
-ul#social-links li:nth-child(1) {
-  animation-delay: 2.7s;
-}
-ul#social-links li:nth-child(2) {
-  animation-delay: 3s;
-}
-ul#social-links li:nth-child(3) {
-  animation-delay: 3.3s;
-}
-ul#social-links li:nth-child(4) {
-  animation-delay: 3.6s;
+body.dark-theme ul#social-links li {
+  background-color: var(--link-bg-dark);
 }
 
 ul#social-links li a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: var(--blue);
-  color: white;
-  font-weight: 700;
-  padding: 12px 20px;
-  border-radius: 12px;
-  text-decoration: none;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 12px rgb(0 87 255 / 0.4);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: color 0.3s;
 }
 
-ul#social-links li a:hover {
-  background: var(--yellow);
-  color: black;
-  box-shadow: 0 6px 16px rgb(255 215 0 / 0.6);
+body.dark-theme ul#social-links li a {
+  color: var(--yellow);
 }
 
-ul#social-links li a svg {
-  width: 22px;
-  height: 22px;
-  fill: white;
-  transition: fill 0.3s ease;
+ul#social-links li:hover {
+  background-color: var(--yellow);
 }
 
-ul#social-links li a:hover svg {
-  fill: black;
+ul#social-links li:hover a {
+  color: var(--blue);
+}
+
+ul#social-links svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 footer {
+  text-align: center;
   padding: 1rem 0;
+  margin-top: 3rem;
   font-size: 0.9rem;
-  color: var(--text-light);
-  border-top: 2px solid var(--yellow);
-  animation: fadeInUp 1s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
-  animation-delay: 3.8s;
+  color: var(--blue);
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInDown {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Адаптив */
 @media (max-width: 600px) {
-  header h1 {
-    font-size: 2rem;
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    text-align: center;
+    flex-grow: 0;
   }
 
   ul#social-links {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  ul#social-links li {
+    flex: 1 1 auto;
   }
 }
