@@ -1,62 +1,55 @@
 <!DOCTYPE html>
-<html lang="ru" >
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MMS Muhammad — Neon Style</title>
+  <title>MMS Muhammad - Neon Style</title>
   <link rel="stylesheet" href="css/style.css" />
   <script defer src="js/script.js"></script>
 </head>
 <body>
   <header>
-    <div class="container header-inner">
-      <div class="avatar-neon-wrap">
+    <div class="container">
+      <div class="avatar-neon">
         <img src="images/avatar.jpg" alt="MMS Muhammad" class="avatar" />
-        <div class="neon-blocks">
-          <span class="neon-block" style="--i:0"></span>
-          <span class="neon-block" style="--i:1"></span>
-          <span class="neon-block" style="--i:2"></span>
-          <span class="neon-block" style="--i:3"></span>
-          <span class="neon-block" style="--i:4"></span>
-          <span class="neon-block" style="--i:5"></span>
-          <span class="neon-block" style="--i:6"></span>
-          <span class="neon-block" style="--i:7"></span>
-        </div>
+        <div class="neon-block neon-block1"></div>
+        <div class="neon-block neon-block2"></div>
+        <div class="neon-block neon-block3"></div>
       </div>
-
-      <div class="header-text">
-        <h1>MMS Muhammad</h1>
-        <p class="subtitle">Подросток, создающий будущее с кодом и играми</p>
+      <h1 class="main-title">MMS Muhammad</h1>
+      <p class="subtitle">Молодой, умный и энергичный разработчик<br>Покоряю мир цифровых технологий и игр</p>
+      <div class="toggles">
+        <button id="neon-toggle" aria-label="Переключить неон-эффекты" title="Переключить неон-эффекты">
+          🌈 Неон ON/OFF
+        </button>
+        <button id="theme-toggle" aria-label="Переключить светлую/тёмную тему" title="Переключить светлую/тёмную тему">
+          🌓 Тема
+        </button>
       </div>
-
-      <button id="theme-toggle" aria-label="Переключить тему" class="toggle-switch">
-        <div class="toggle-thumb"></div>
-      </button>
     </div>
   </header>
 
-  <main class="container main-content">
-    <section class="about neon-box">
-      <h2>Обо мне</h2>
-      <p>
-        Я MMS Muhammad — подросток, который горит технологиями и не боится мечтать ярко.
-        Программирую на Python, играю в игры и создаю цифровые миры. Мой стиль — это
-        неоновый свет и бесконечные идеи.
+  <main class="container">
+    <section class="about">
+      <h2 class="section-title">Обо мне</h2>
+      <p class="about-text">
+        Привет! Я MMS Muhammad — подросток, который живёт цифровым миром.
+        Люблю играть, создавать на Scratch и только начал покорять Python.
+        В разработке ищу не просто код, а красоту и свободу творчества.
+        Добро пожаловать в мою неоновую вселенную!
       </p>
     </section>
 
-    <section class="links neon-box">
-      <h2>Мои ссылки</h2>
+    <section class="links">
+      <h2 class="section-title">Мои ссылки</h2>
       <ul id="social-links" class="social-list">
-        <li>Загрузка...</li>
+        <li>Загрузка ссылок...</li>
       </ul>
     </section>
   </main>
 
   <footer>
-    <div class="container footer-inner">
-      <p>&copy; 2025 MMS Muhammad</p>
-    </div>
+    <p>© 2025 MMS Muhammad</p>
   </footer>
 </body>
 </html>

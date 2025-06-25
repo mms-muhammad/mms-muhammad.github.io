@@ -1,61 +1,59 @@
 const socialFiles = [
-  'tg-link.txt',
-'youtube-link.txt',
-'scratch.txt',
-'game-link.txt'
+  'social/tg-link.txt',
+'social/youtube-link.txt',
+'social/scratch.txt',
+'social/game-link.txt'
 ];
 
 const socialLabels = {
   'tg-link.txt': 'Telegram',
   'youtube-link.txt': 'YouTube',
   'scratch.txt': 'Scratch',
-  'game-link.txt': 'Игры'
+  'game-link.txt': 'Мои игры'
 };
 
 const socialIcons = {
-  'tg-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 3L3 10l7 2 2 7 8-18z" fill="currentColor"/></svg>`,
-  'youtube-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15l5-3-5-3v6z" fill="currentColor"/><path d="M21.8 8s-.2-1.43-.82-2.06c-.79-.82-1.67-.82-2.07-.87-2.9-.2-7.26-.2-7.26-.2h-.01s-4.37 0-7.27.2c-.41.05-1.28.07-2.08.87C2.4 6.57 2.2 8 2.2 8S2 9.6 2 11.18v1.63c0 1.58.2 3.18.2 3.18s.2 1.43.82 2.06c.79.82 1.83.8 2.3.9 1.67.12 7.1.21 7.1.21s4.37 0 7.27-.2c.41-.05 1.28-.07 2.08-.87.62-.63.82-2.06.82-2.06s.2-1.6.2-3.18v-1.63c0-1.58-.2-3.18-.2-3.18z" fill="currentColor"/></svg>`,
-  'scratch.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#f0c419"/><path d="M7.5 8.5l1 1.5 2.5-1.5-2 2 3 1-1 1-5-1.5 1-3.5z" fill="#000"/></svg>`,
-  'game-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="6" y="9" width="12" height="6" rx="2" ry="2" fill="#3366cc"/><circle cx="9" cy="12" r="1" fill="#fff"/><circle cx="15" cy="12" r="1" fill="#fff"/></svg>`
+  'tg-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.04 15.58l-.39 3.81c.56 0 .8-.24 1.09-.52l2.62-2.52 5.43 3.98c1 .56 1.71.27 1.97-.93L22 7.61c.26-1.16-.4-1.67-1.2-1.38L3.99 11.8c-1.15.44-1.13 1.06-.2 1.36l4.98 1.55 11.58-7.47c.55-.36 1.05-.16.64.23"/></svg>`,
+  'youtube-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6zM21.8 7.2s-.2-1.42-.82-2.04c-.78-.83-1.66-.83-2.06-.88C15.65 4 12 4 12 4s-3.65 0-6.92.28c-.4.05-1.28.05-2.06.88-.62.62-.82 2.04-.82 2.04S2 8.82 2 10.44v3.12c0 1.62.28 2.9.28 2.9s.2 1.42.82 2.04c.78.83 1.8.8 2.26.9 1.63.29 6.92.28 6.92.28s3.64 0 6.92-.28c.4-.05 1.28-.05 2.06-.88.62-.62.82-2.04.82-2.04s.28-1.28.28-2.9v-3.12c0-1.62-.28-2.9-.28-2.9z"/></svg>`,
+  'scratch.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#f6851f"/></svg>`,
+  'game-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 7v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7h16zm-6 6h2v2h-2v-2zm0-4h2v2h-2V9z"/></svg>`
 };
 
-async function loadSocialLinks() {
+async function loadLinks() {
   const ul = document.getElementById('social-links');
   ul.innerHTML = '';
 
   for (const file of socialFiles) {
     try {
-      const res = await fetch(`social/${file}`);
+      const res = await fetch(file);
       if (!res.ok) throw new Error('Ошибка загрузки');
-      const link = (await res.text()).trim();
-      if (!link) continue;
-
-      const label = socialLabels[file] || 'Ссылка';
-      const icon = socialIcons[file] || '';
+      const url = (await res.text()).trim();
 
       const li = document.createElement('li');
-      li.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer">${icon}${label}</a>`;
+      const icon = socialIcons[file] || '';
+      const label = socialLabels[file] || 'Ссылка';
+
+      li.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${label}">${icon} ${label}</a>`;
       ul.appendChild(li);
     } catch {
-      // Ошибка загрузки — пропускаем
+      // Если файл не загрузился, покажем пустой элемент
+      const li = document.createElement('li');
+      li.textContent = `Ссылка ${socialLabels[file] || file} недоступна`;
+      ul.appendChild(li);
     }
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadSocialLinks();
+// Переключатель неона
+document.getElementById('neon-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('neon-off');
+});
 
-  const themeToggle = document.getElementById('theme-toggle');
-  themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-theme');
-    if (document.body.classList.contains('dark-theme')) {
-      localStorage.setItem('theme', 'dark');
-    } else {
-      localStorage.setItem('theme', 'light');
-    }
-  });
+// Переключатель темы (светлая/тёмная)
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+});
 
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-theme');
-  }
+window.addEventListener('DOMContentLoaded', () => {
+  loadLinks();
 });
