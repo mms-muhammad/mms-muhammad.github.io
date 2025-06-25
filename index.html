@@ -1,134 +1,56 @@
 <!DOCTYPE html>
 <html lang="ru" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MMS Muhammad - Персональный сайт</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- ... (остальное как было) ... -->
+    <style>
+        /* Добавим стиль Scratch в навыки */
+        .scratch-card {
+            background-color: #4D97FF !important;
+            color: white !important;
+        }
+        .scratch-card i {
+            color: white !important;
+        }
+        .python-card {
+            background-color: #3776AB !important;
+            color: white !important;
+        }
+        .python-card i {
+            color: #FFD43B !important;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
+    <!-- ... (остальное как было) ... -->
+    
+    <section id="skills" class="section skills">
         <div class="container">
-            <div class="header-inner">
-                <a href="#" class="logo">MMS Muhammad</a>
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li><a href="#about">Обо мне</a></li>
-                        <li><a href="#skills">Навыки</a></li>
-                        <li><a href="#contact">Контакты</a></li>
-                        <li>
-                            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-                                <i class="fas fa-moon"></i>
-                            </button>
-                        </li>
-                    </ul>
-                    <button class="nav-toggle" aria-label="Toggle navigation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </nav>
+            <h2 class="section-title">Мои навыки</h2>
+            <div class="skills-grid">
+                <div class="skill-card scratch-card">
+                    <i class="fas fa-cat"></i> <!-- Иконка кота как в Scratch -->
+                    <h3>Scratch</h3>
+                    <p>Создаю крутые игры и анимации в Scratch. Могу показать мои проекты!</p>
+                </div>
+                <div class="skill-card python-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                    <p>Начинаю изучать Python. Пока знаю основы, но учусь каждый день!</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Создание игр</h3>
+                    <p>Люблю придумывать и разрабатывать свои игры</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Креативность</h3>
+                    <p>Много интересных идей для проектов</p>
+                </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-inner">
-                    <div class="hero-content">
-                        <h1>Привет, я MMS Muhammad</h1>
-                        <p class="subtitle">Веб-разработчик и дизайнер</p>
-                        <div class="social-links">
-                            <a href="https://youtube.com/ваш_канал" target="_blank" class="social-link">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                            <a href="https://t.me/ваш_телеграм" target="_blank" class="social-link">
-                                <i class="fab fa-telegram"></i>
-                            </a>
-                        </div>
-                        <a href="#contact" class="btn">Связаться</a>
-                    </div>
-                    <div class="hero-image">
-                        <img src="images/avatar.jpg" alt="MMS Muhammad" class="avatar">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="section about">
-            <div class="container">
-                <h2 class="section-title">Обо мне</h2>
-                <div class="about-content">
-                    <p>Привет! Меня зовут MMS Muhammad. Я занимаюсь веб-разработкой и созданием современных, адаптивных сайтов.</p>
-                    <p>Моя цель - создавать красивые и функциональные веб-приложения, которые обеспечивают отличный пользовательский опыт на любых устройствах.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="section skills">
-            <div class="container">
-                <h2 class="section-title">Мои навыки</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <i class="fab fa-html5"></i>
-                        <h3>HTML5</h3>
-                        <p>Семантическая верстка, доступность, современные API</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fab fa-css3-alt"></i>
-                        <h3>CSS3</h3>
-                        <p>Flexbox, Grid, анимации, переменные</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fab fa-js"></i>
-                        <h3>JavaScript</h3>
-                        <p>ES6+, асинхронное программирование, работа с DOM</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h3>Адаптивный дизайн</h3>
-                        <p>Сайты для всех устройств и экранов</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section contact">
-            <div class="container">
-                <h2 class="section-title">Контакты</h2>
-                <div class="contact-content">
-                    <p>Свяжитесь со мной через социальные сети или напишите на email:</p>
-                    <div class="contact-links">
-                        <a href="mailto:ваш@email.com" class="contact-link">
-                            <i class="fas fa-envelope"></i> ваш@email.com
-                        </a>
-                        <a href="https://t.me/ваш_телеграм" target="_blank" class="contact-link">
-                            <i class="fab fa-telegram"></i> @ваш_телеграм
-                        </a>
-                        <a href="https://youtube.com/ваш_канал" target="_blank" class="contact-link">
-                            <i class="fab fa-youtube"></i> YouTube канал
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2023 MMS Muhammad. Все права защищены.</p>
-            <div class="footer-links">
-                <a href="#" class="footer-link">Политика конфиденциальности</a>
-                <a href="#" class="footer-link">Условия использования</a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/script.js"></script>
+    <!-- ... (остальное как было) ... -->
 </body>
 </html>
