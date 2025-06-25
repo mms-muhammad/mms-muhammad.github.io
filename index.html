@@ -3,29 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>mms muhammad — neon style</title>
+  <title>MMS Muhammad — Неоновый сайт</title>
   <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
 </head>
 <body>
-  <main>
-    <section class="profile">
-      <div class="avatar-wrapper neon-glow">
-        <img src="images/avatar.jpg" alt="Аватар mms muhammad" class="avatar" />
+  <header class="container parallax" data-speed="0.5">
+    <div class="avatar-neon-wrapper">
+      <img src="images/avatar.jpg" alt="MMS Muhammad" class="avatar" />
+      <div class="neon-blocks">
+        <span></span><span></span><span></span><span></span>
       </div>
-      <h1 class="name">mms muhammad</h1>
+    </div>
+    <div class="header-info">
+      <h1 id="greeting"></h1>
+      <h2 class="main-title">MMS Muhammad</h2>
+      <p class="subtitle">Игры, код, цифровые технологии и много энергии!</p>
+    </div>
+    <div class="header-controls">
+      <button id="theme-toggle" aria-label="Переключить цветовую тему">🎨</button>
+      <button id="neon-toggle" aria-label="Переключить неоновый эффект">💡</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="about parallax" data-speed="0.3">
+      <h2 class="section-title neon-text-yellow">Обо мне</h2>
+      <p class="about-text">
+        Я — MMS Muhammad, молодой и энергичный разработчик. Знаю Scratch, учу Python, и всегда ищу новые пути творить и создавать крутые проекты.
+      </p>
     </section>
 
-    <section class="links-section">
-      <ul id="social-links" class="social-links"></ul>
+    <section class="links-section parallax" data-speed="0.1">
+      <h2 class="section-title neon-text-yellow">Мои ссылки</h2>
+      <ul id="social-links" class="social-list">
+        <li>Загрузка ссылок...</li>
+      </ul>
+      <button id="toggle-links" class="btn neon-btn">Показать / Скрыть ссылки</button>
     </section>
 
-    <section class="buttons-section">
-      <button id="links-toggle" aria-label="Показать ссылки">Ссылки</button>
-      <button id="theme-toggle" aria-label="Переключить тему">Тема</button>
-      <button id="neon-toggle" aria-label="Переключить неон">✨ Неон</button>
+    <section class="contact-section parallax" data-speed="0.2">
+      <h2 class="section-title neon-text-yellow">Связаться со мной</h2>
+      <form id="contact-form" class="contact-form" novalidate>
+        <input type="text" id="name" name="name" placeholder="Ваше имя" required />
+        <input type="email" id="email" name="email" placeholder="Ваш email" required />
+        <textarea id="message" name="message" placeholder="Сообщение" rows="4" required></textarea>
+        <button type="submit" class="btn neon-btn">Отправить</button>
+      </form>
+      <p id="form-status" class="form-status"></p>
     </section>
   </main>
 
-  <script src="js/script.js"></script>
+  <button id="scroll-top" aria-label="Наверх">⬆️</button>
+
+  <footer class="container">
+    <p>&copy; 2025 MMS Muhammad. Все права защищены.</p>
+  </footer>
 </body>
 </html>
