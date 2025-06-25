@@ -13,55 +13,51 @@ const socialLabels = {
 };
 
 const socialIcons = {
-  'tg-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.04 15.58l-.39 3.81c.56 0 .8-.24 1.09-.52l2.62-2.52 5.43 3.98c1 .56 1.71.27 1.97-.93L22 7.61c.26-1.16-.4-1.67-1.2-1.38L3.99 11.8c-1.15.44-1.13 1.06-.2 1.36l4.98 1.55 11.58-7.47c.55-.36 1.05-.16.64.23"/></svg>`,
-  'youtube-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6zM21.8 7.2s-.2-1.42-.82-2.04c-.78-.83-1.66-.83-2.06-.88C15.65 4 12 4 12 4s-3.65 0-6.92.28c-.4.05-1.28.05-2.06.88-.62.62-.82 2.04-.82 2.04S2 8.82 2 10.44v3.12c0 1.62.28 2.9.28 2.9s.2 1.42.82 2.04c.78.83 1.8.8 2.26.89 1.64.18 6.92.28 6.92.28s3.65 0 6.92-.28c.4-.05 1.28-.05 2.06-.88.62-.62.82-2.04.82-2.04s.28-1.28.28-2.9v-3.12c0-1.62-.28-2.9-.28-2.9z"/></svg>`,
-  'scratch.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C7 2 4 8 4 8s2.31 3.69 8 3.69c5.69 0 8-3.69 8-3.69S17 2 12 2zM6 14s1.87 1.5 6 1.5c4.13 0 6-1.5 6-1.5S17 20 12 20c-5 0-6-6-6-6z"/></svg>`,
-  'game-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 8v8h16V8H4zm7 3h2v2h-2v-2zm-1-3h4v1h-4v-1z"/></svg>`
+  'tg-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.04 15.58l-.39 3.81c.56 0 .8-.24 1.09-.52l2.62-2.52 5.43 3.98c1 .56 1.71.27 1.97-.93L22 7.61c.26-1.16-.4-1.67-1.2-1.38L3.99 11.8c-1.15.44-1.13 1.06-.2 1.36l4.98 1.55 11.55-7.24c.55-.33 1.05-.15.64.2"/></svg>`,
+  'youtube-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15l5-3-5-3v6z"/><path d="M21.8 8s-.2-1.43-.82-2.06c-.79-.82-1.67-.82-2.07-.87-2.9-.2-7.26-.2-7.26-.2h-.01s-4.37 0-7.27.2c-.41.05-1.28.07-2.08.87C2.4 6.57 2.2 8 2.2 8S2 9.6 2 11.18v1.63c0 1.58.2 3.18.2 3.18s.2 1.43.82 2.06c.79.82 1.83.8 2.3.9 1.67.12 7.1.21 7.1.21s4.37 0 7.27-.2c.41-.05 1.28-.07 2.08-.87.62-.63.82-2.06.82-2.06s.2-1.6.2-3.18v-1.63c0-1.58-.2-3.18-.2-3.18z"/></svg>`,
+  'scratch.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#f0c419"/><path d="M7.5 8.5l1 1.5 2.5-1.5-2 2 3 1-1 1-5-1.5 1-3.5z" fill="#000"/></svg>`,
+  'game-link.txt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="6" y="9" width="12" height="6" rx="2" ry="2" fill="#3366cc"/><circle cx="9" cy="12" r="1" fill="#fff"/><circle cx="15" cy="12" r="1" fill="#fff"/></svg>`
 };
 
-function loadSocialLinks() {
-  const list = document.getElementById('social-links');
-  list.innerHTML = ''; // очистка списка перед загрузкой
+async function loadSocialLinks() {
+  const ul = document.getElementById('social-links');
+  ul.innerHTML = '';
 
-  socialFiles.forEach((path, i) => {
-    // получаем только имя файла, чтобы взять label и icon
-    const filename = path.split('/').pop();
+  for (const file of socialFiles) {
+    try {
+      const res = await fetch(`social/${file}`);
+      if (!res.ok) throw new Error('Ошибка загрузки');
+      const link = (await res.text()).trim();
+      if (!link) continue;
 
-    fetch(path)
-    .then(res => {
-      if (!res.ok) throw new Error('Ошибка загрузки файла ' + path);
-      return res.text();
-    })
-    .then(link => {
+      const label = socialLabels[file] || 'Ссылка';
+      const icon = socialIcons[file] || '';
+
       const li = document.createElement('li');
-      li.style.animationDelay = (0.3 + i * 0.15) + 's';
-      li.innerHTML = `<a href="${link.trim()}" target="_blank" rel="noopener noreferrer" aria-label="${socialLabels[filename]}">${socialIcons[filename]}${socialLabels[filename]}</a>`;
-      list.appendChild(li);
-    })
-    .catch(() => {
-      const li = document.createElement('li');
-      li.textContent = 'Не удалось загрузить ' + socialLabels[filename];
-      list.appendChild(li);
-    });
-  });
+      li.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer">${icon}${label}</a>`;
+      ul.appendChild(li);
+    } catch {
+      // Можно добавить fallback или пропустить
+    }
+  }
 }
 
-// Переключение темы
-const themeToggleBtn = document.getElementById('theme-toggle');
-themeToggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark-theme');
-  // Сохраняем выбор в localStorage
-  if (document.body.classList.contains('dark-theme')) {
-    localStorage.setItem('theme', 'dark');
-  } else {
-    localStorage.setItem('theme', 'light');
-  }
-});
+document.addEventListener('DOMContentLoaded', () => {
+  loadSocialLinks();
 
-// Автозагрузка темы при загрузке страницы
-window.addEventListener('DOMContentLoaded', () => {
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    // Можно сохранить выбор темы в localStorage
+    if (document.body.classList.contains('dark-theme')) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
+  });
+
+  // Авто-установка темы из localStorage
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-theme');
   }
-  loadSocialLinks();
 });

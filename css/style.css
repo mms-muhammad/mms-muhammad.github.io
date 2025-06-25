@@ -1,164 +1,237 @@
-/* Переменные для светлой и темной темы */
+/* --- Цвета и базовые настройки --- */
 :root {
-  --yellow: #ffc107;
-  --blue: #1565c0;
+  --yellow-light: #f7d369;
+  --yellow-dark: #c7a936;
+  --blue-light: #3366cc;
+  --blue-dark: #1a3a99;
+  --text-light: #333;
+  --text-dark: #e1e1e1;
   --bg-light: #fff;
-  --text-light: #222;
   --bg-dark: #121212;
-  --text-dark: #eee;
-  --link-bg-light: #e3f2fd;
-  --link-bg-dark: #1e2a38;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.6);
 }
 
-/* Начальные стили с использованием переменных */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-light);
   color: var(--text-light);
-  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.container {
+  width: min(90%, 900px);
+  margin: 0 auto;
+}
+
+/* --- Хедер --- */
+header {
+  padding: 1.5rem 0;
+  border-bottom: 2px solid var(--yellow-dark);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px var(--shadow-light);
+  transition: box-shadow 0.3s ease;
+}
+
+.header-text {
+  flex-grow: 1;
+  margin-left: 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 2.8rem;
+  color: var(--blue-dark);
+  user-select: none;
+}
+
+.subtitle {
+  margin: 0.15rem 0 0 0;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #555;
+  user-select: none;
+}
+
+/* Кнопка темы */
+#theme-toggle {
+background: none;
+border: none;
+cursor: pointer;
+padding: 0.25rem;
+transition: transform 0.3s ease;
+}
+
+#theme-toggle:hover {
+transform: rotate(20deg);
+}
+
+#theme-toggle img {
+width: 28px;
+height: 28px;
+filter: var(--blue-dark);
+transition: filter 0.3s ease;
+}
+
+/* --- Основной контент --- */
+main {
+  padding: 2rem 0 4rem;
+}
+
+.about h2,
+.links h2 {
+  color: var(--yellow-dark);
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  user-select: none;
+}
+
+.about p {
+  max-width: 600px;
+  font-size: 1.15rem;
+  color: #555;
+}
+
+/* Список ссылок */
+.social-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.social-list li a {
+  text-decoration: none;
+  color: var(--blue-dark);
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  background: var(--yellow-light);
+  box-shadow: 0 2px 6px var(--shadow-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-list li a svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--blue-dark);
+  flex-shrink: 0;
+  transition: fill 0.3s ease;
+}
+
+.social-list li a:hover {
+  background-color: var(--blue-dark);
+  color: var(--yellow-light);
+}
+
+.social-list li a:hover svg {
+  fill: var(--yellow-light);
+}
+
+/* --- Футер --- */
+footer {
+  border-top: 2px solid var(--yellow-dark);
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* --- Тёмная тема --- */
 body.dark-theme {
   background-color: var(--bg-dark);
   color: var(--text-dark);
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 1rem;
+body.dark-theme h1 {
+  color: var(--blue-light);
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
+body.dark-theme .about h2,
+body.dark-theme .links h2 {
+  color: var(--yellow-light);
 }
 
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 3px solid var(--yellow);
-  object-fit: cover;
+body.dark-theme .about p {
+  color: #ccc;
 }
 
-h1 {
-  color: var(--blue);
-  margin: 0;
-  flex-grow: 1;
+body.dark-theme .social-list li a {
+  background: #283845;
+  color: var(--yellow-light);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.9);
 }
 
-p {
-  margin: 0.5rem 0 0 0;
+body.dark-theme .social-list li a svg {
+  fill: var(--yellow-light);
 }
 
-#theme-toggle {
-background: none;
-border: none;
-cursor: pointer;
-filter: invert(0);
-transition: filter 0.3s;
-width: 36px;
-height: 36px;
-padding: 0;
+body.dark-theme .social-list li a:hover {
+  background-color: var(--yellow-light);
+  color: var(--blue-dark);
 }
 
-body.dark-theme #theme-toggle {
-  filter: invert(1);
+body.dark-theme .social-list li a:hover svg {
+  fill: var(--blue-dark);
 }
 
-main {
-  margin-top: 2rem;
-}
-
-.about h2,
-.links h2 {
-  color: var(--yellow);
-  margin-bottom: 0.5rem;
-}
-
-ul#social-links {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-ul#social-links li {
-  background-color: var(--link-bg-light);
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  flex: 1 1 120px;
-  text-align: center;
-  transition: background-color 0.3s;
-  cursor: pointer;
-  user-select: none;
-}
-
-body.dark-theme ul#social-links li {
-  background-color: var(--link-bg-dark);
-}
-
-ul#social-links li a {
-  color: var(--blue);
-  text-decoration: none;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: color 0.3s;
-}
-
-body.dark-theme ul#social-links li a {
-  color: var(--yellow);
-}
-
-ul#social-links li:hover {
-  background-color: var(--yellow);
-}
-
-ul#social-links li:hover a {
-  color: var(--blue);
-}
-
-ul#social-links svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem 0;
-  margin-top: 3rem;
-  font-size: 0.9rem;
-  color: var(--blue);
-}
-
-/* Адаптив */
-@media (max-width: 600px) {
-  header {
+/* --- Адаптивность --- */
+@media (max-width: 480px) {
+  .header-inner {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+  }
+
+  .header-text {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
   }
 
   h1 {
-    text-align: center;
-    flex-grow: 0;
+    font-size: 2.2rem;
   }
 
-  ul#social-links {
-    flex-direction: column;
-    gap: 0.75rem;
+  main {
+    padding: 1.5rem 0 3rem;
   }
 
-  ul#social-links li {
-    flex: 1 1 auto;
+  .about p,
+  .social-list {
+    max-width: 100%;
   }
 }
