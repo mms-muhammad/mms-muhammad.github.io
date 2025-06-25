@@ -3,32 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MMS Muhammad - Начинающий программист</title>
+    <title>MMS Muhammad | Digital Creator</title>
+    <meta name="description" content="Персональный сайт MMS Muhammad - разработчика и создателя контента">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="cursor"></div>
+    
     <header class="header">
         <div class="container">
-            <div class="header-inner">
-                <a href="#" class="logo">MMS Muhammad</a>
+            <div class="header__inner">
+                <a href="#" class="logo" data-cursor-hover>
+                    <span class="logo__accent">MMS</span>Muhammad
+                </a>
+                
                 <nav class="nav">
-                    <ul class="nav-list">
-                        <li><a href="#about">Обо мне</a></li>
-                        <li><a href="#skills">Навыки</a></li>
-                        <li><a href="#contact">Контакты</a></li>
+                    <ul class="nav__list">
+                        <li><a href="#about" data-cursor-hover>Обо мне</a></li>
+                        <li><a href="#work" data-cursor-hover>Работы</a></li>
+                        <li><a href="#contact" data-cursor-hover>Контакты</a></li>
                         <li>
-                            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-                                <i class="fas fa-moon"></i>
+                            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему" data-cursor-hover>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                                </svg>
                             </button>
                         </li>
                     </ul>
-                    <button class="nav-toggle" aria-label="Toggle navigation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
                 </nav>
+                
+                <button class="burger" aria-label="Меню" data-cursor-hover>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </header>
@@ -36,22 +46,39 @@
     <main>
         <section class="hero">
             <div class="container">
-                <div class="hero-inner">
-                    <div class="hero-content">
-                        <h1>Привет, я MMS Muhammad</h1>
-                        <p class="subtitle">Начинающий программист и создатель игр</p>
+                <div class="hero__content">
+                    <h1 class="hero__title">
+                        <span class="line">Привет, я</span>
+                        <span class="line"><span class="text-accent">MMS Muhammad</span></span>
+                        <span class="line">Digital Creator</span>
+                    </h1>
+                    
+                    <div class="hero__image">
+                        <div class="image-wrapper">
+                            <img src="assets/avatar.jpg" alt="MMS Muhammad" loading="lazy">
+                        </div>
+                    </div>
+                    
+                    <div class="hero__footer">
                         <div class="social-links">
-                            <a href="https://youtube.com/ТВОЙ_КАНАЛ" target="_blank" class="social-link">
-                                <i class="fab fa-youtube"></i>
+                            <a href="https://youtube.com/ВАШ_КАНАЛ" target="_blank" rel="noopener" aria-label="YouTube" data-cursor-hover>
+                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                    <use xlink:href="assets/social-icons.svg#youtube"></use>
+                                </svg>
                             </a>
-                            <a href="https://t.me/ТВОЙ_ТЕЛЕГРАМ" target="_blank" class="social-link">
-                                <i class="fab fa-telegram"></i>
+                            <a href="https://t.me/ВАШ_НИК" target="_blank" rel="noopener" aria-label="Telegram" data-cursor-hover>
+                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                    <use xlink:href="assets/social-icons.svg#telegram"></use>
+                                </svg>
                             </a>
                         </div>
-                        <a href="#contact" class="btn">Написать мне</a>
-                    </div>
-                    <div class="hero-image">
-                        <img src="images/avatar.jpg" alt="MMS Muhammad" class="avatar">
+                        
+                        <a href="#contact" class="btn" data-cursor-hover data-cursor-mix>
+                            <span>Связаться</span>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -59,37 +86,54 @@
 
         <section id="about" class="section about">
             <div class="container">
-                <h2 class="section-title">Обо мне</h2>
-                <div class="about-content">
-                    <p>Привет! Я увлекаюсь программированием и создаю крутые проекты в Scratch. Люблю придумывать игры и анимации!</p>
-                    <p>Сейчас начал изучать Python и мечтаю стать профессиональным разработчиком. У меня много идей для будущих проектов!</p>
+                <div class="section__header">
+                    <h2 class="section__title">Обо мне</h2>
+                    <p class="section__subtitle">Кто я и чем занимаюсь</p>
+                </div>
+                
+                <div class="about__content">
+                    <p>Я начинающий разработчик с фокусом на создании интересных проектов. Начал с визуального программирования в Scratch, где освоил базовые концепции алгоритмов и логики.</p>
+                    <p>Сейчас активно изучаю Python, чтобы перейти к более сложным и функциональным проектам. Верю, что программирование — это способ создавать удивительные вещи и решать реальные проблемы.</p>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="section skills">
+        <section id="work" class="section work">
             <div class="container">
-                <h2 class="section-title">Что я умею</h2>
-                <div class="skills-grid">
-                    <div class="skill-card" style="background-color: #4D97FF; color: white;">
-                        <i class="fas fa-cat" style="color: white;"></i>
-                        <h3>Scratch</h3>
-                        <p>Создаю игры и анимации. Есть несколько классных проектов!</p>
+                <div class="section__header">
+                    <h2 class="section__title">Мои навыки</h2>
+                    <p class="section__subtitle">Что я уже умею</p>
+                </div>
+                
+                <div class="skills">
+                    <div class="skill" data-cursor-hover>
+                        <div class="skill__icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24">
+                                <use xlink:href="assets/social-icons.svg#scratch"></use>
+                            </svg>
+                        </div>
+                        <h3 class="skill__title">Scratch</h3>
+                        <p class="skill__desc">Создание игр и анимаций с пониманием базовых принципов программирования</p>
                     </div>
-                    <div class="skill-card" style="background-color: #3776AB; color: white;">
-                        <i class="fab fa-python" style="color: #FFD43B;"></i>
-                        <h3>Python</h3>
-                        <p>Изучаю основы. Уже могу писать простые программы!</p>
+                    
+                    <div class="skill" data-cursor-hover>
+                        <div class="skill__icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24">
+                                <use xlink:href="assets/social-icons.svg#python"></use>
+                            </svg>
+                        </div>
+                        <h3 class="skill__title">Python</h3>
+                        <p class="skill__desc">Основы языка, простые скрипты и понимание ООП</p>
                     </div>
-                    <div class="skill-card">
-                        <i class="fas fa-gamepad"></i>
-                        <h3>Игровой дизайн</h3>
-                        <p>Придумываю концепты и механики для игр</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fas fa-lightbulb"></i>
-                        <h3>Креативность</h3>
-                        <p>У меня всегда много интересных идей</p>
+                    
+                    <div class="skill" data-cursor-hover>
+                        <div class="skill__icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24">
+                                <use xlink:href="assets/social-icons.svg#game"></use>
+                            </svg>
+                        </div>
+                        <h3 class="skill__title">Игровой дизайн</h3>
+                        <p class="skill__desc">Разработка механик и концептов для игровых проектов</p>
                     </div>
                 </div>
             </div>
@@ -97,17 +141,25 @@
 
         <section id="contact" class="section contact">
             <div class="container">
-                <h2 class="section-title">Где меня найти</h2>
-                <div class="contact-content">
-                    <p>Хочешь пообщаться или предложить проект? Пиши!</p>
-                    <div class="contact-links">
-                        <a href="https://t.me/ТВОЙ_ТЕЛЕГРАМ" target="_blank" class="contact-link">
-                            <i class="fab fa-telegram"></i> Telegram
-                        </a>
-                        <a href="https://youtube.com/ТВОЙ_КАНАЛ" target="_blank" class="contact-link">
-                            <i class="fab fa-youtube"></i> YouTube
-                        </a>
-                    </div>
+                <div class="section__header">
+                    <h2 class="section__title">Контакты</h2>
+                    <p class="section__subtitle">Давайте работать вместе</p>
+                </div>
+                
+                <div class="contact__links">
+                    <a href="https://t.me/ВАШ_НИК" class="contact-link" target="_blank" rel="noopener" data-cursor-hover>
+                        <span>Telegram</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24">
+                            <use xlink:href="assets/social-icons.svg#telegram"></use>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://youtube.com/ВАШ_КАНАЛ" class="contact-link" target="_blank" rel="noopener" data-cursor-hover>
+                        <span>YouTube</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24">
+                            <use xlink:href="assets/social-icons.svg#youtube"></use>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>
@@ -115,7 +167,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2023 MMS Muhammad. Все права защищены.</p>
+            <p>© <span class="year">2023</span> MMS Muhammad. Все права защищены.</p>
         </div>
     </footer>
 
